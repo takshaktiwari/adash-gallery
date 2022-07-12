@@ -1,0 +1,43 @@
+<?php
+
+namespace Database\Factories;
+
+use Takshak\Agallery\Models\Gallery;
+use Takshak\Agallery\Models\GalleryItem;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GalleryItem>
+ */
+class GalleryItemFactory extends Factory
+{
+    protected $model = GalleryItem::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'gallery_id'    =>  Gallery::inRandomOrder()->first()->id,
+            'title'         =>  $this->faker->realText(rand(20, 50), 2),
+            'description'   =>  $this->faker->realText(rand(150, 250), 2),
+            'item_type'     =>  $this->getItemType(),
+            'image_lg'      =>  null,
+            'image_md'      =>  null,
+            'image_sm'      =>  null,
+            'youtube_url'   =>  null,
+            'user_id'       =>  User::inRandomOrder()->first()->id,
+        ];
+    }
+
+    public function getItemType()
+    {
+        $arr = ['image', 'video'];
+        shuffle($arr);
+        return end($arr);
+    }
+}

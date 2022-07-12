@@ -1,0 +1,25 @@
+    /*
+    | Agallery
+    |---------------------
+    | For configuration of package: `takshak/adash-gallery`.
+    */
+    'gallery'	=>	[
+        'install'	=>	[
+            // Enable / Disable `adash-gallery:install` command
+            'command'	=>	env('APP_DEBUG', true),
+        ],
+        'cover_image'	=>	[
+            'small'	=>	[
+                'width'		=>	500,
+                'height'	=>	500,
+            ],
+            'medium'	=>	[
+                'width'		=>	1000,
+                'height'	=>	600,
+            ],
+            'large'	=>	[
+                'width'		=>	1500,
+                'height'	=>	550,
+            ]
+        ],
+    ],

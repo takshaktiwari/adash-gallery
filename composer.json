@@ -1,0 +1,29 @@
+{
+    "name": "takshak/adash-gallery",
+    "keywords": ["laravel", "admin panel", "panel", "dashboard", "image gallery"],
+    "description": "Image Gallery for adash admin panel",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Takshak Tiwari",
+            "email": "takshaktiwari@gmail.com"
+        }
+    ],
+    "require": {
+        "takshak/adash": "^3.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Takshak\\Agallery\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Takshak\\Agallery\\AgalleryServiceProvider"
+            ]
+        }
+    }
+}
