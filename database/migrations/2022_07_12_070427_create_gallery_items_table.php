@@ -14,7 +14,6 @@ return new class extends Migration {
     {
         Schema::create('gallery_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gallery_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('description', 255)->nullable()->default(null);
             $table->string('item_type')->default('image')->comment('image / video');
@@ -22,6 +21,7 @@ return new class extends Migration {
             $table->string('image_md', 255)->nullable()->default(null);
             $table->string('image_sm', 255)->nullable()->default(null);
             $table->string('youtube_url', 255)->nullable()->default(null);
+            $table->boolean('status')->default(true);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null')->default(null);
             $table->timestamps();
         });

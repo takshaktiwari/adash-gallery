@@ -2,9 +2,11 @@
 
 namespace Takshak\Agallery\Models;
 
+use App\Models\User;
 use Database\Factories\GalleryItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Takshak\Adash\Traits\Models\CommonModelTrait;
 
@@ -26,5 +28,15 @@ class Gallery extends Model
     public function galleryItems(): BelongsToMany
     {
         return $this->belongsToMany(GalleryItem::class);
+    }
+
+    /**
+     * Get the user that owns the Gallery
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

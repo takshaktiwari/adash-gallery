@@ -46,6 +46,10 @@ class InstallCommand extends Command
                 $this->stubsPath . '/Http/Controllers/Admin/GalleryController.stub',
                 app_path('Http/Controllers/Admin/GalleryController.php')
             ],
+            [
+                $this->stubsPath . '/Http/Controllers/Admin/GalleryItemController.stub',
+                app_path('Http/Controllers/Admin/GalleryItemController.php')
+            ],
 
             // seeders
             [
