@@ -5,6 +5,7 @@ namespace Takshak\Agallery\Traits\Controllers\Admin;
 use Illuminate\Support\Facades\View;
 use Takshak\Agallery\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Takshak\Agallery\Actions\GalleryAction;
 
 trait GalleryControllerTrait
@@ -71,5 +72,17 @@ trait GalleryControllerTrait
 
         $gallery = $action->save($request, $gallery);
         return to_route('admin.galleries.show', [$gallery])->withSuccess('Gallery has been successfully updated.');
+    }
+
+    public function destroy(Gallery $gallery)
+    {
+        Storage::disk('public')
+            ->delete([
+                $gallery->image_sm,
+                $gallery->image_md,
+                $gallery->image_lg
+            ]);
+        $gallery->delete();
+        return to_route('admin.galleries.index')->withSuccess('SUCCESS !! Gallery has been deleted.');
     }
 }

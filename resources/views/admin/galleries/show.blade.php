@@ -15,7 +15,7 @@
                     <img src="{{ $gallery->image_md() }}" alt="cover image" class="w-100 img-thumbnail">
                 </div>
                 <div class="col-md-8 my-auto">
-                    <table class="table mb-0">
+                    <table class="table">
                         <tr>
                             <td><b>Name:</b></td>
                             <td>{{ $gallery->name }}</td>
@@ -49,6 +49,17 @@
                             <td>{{ $gallery->user->name }}</td>
                         </tr>
                     </table>
+                    <a href="{{ route('admin.galleries.edit', [$gallery]) }}" class="btn btn-success" title="Edit this">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+
+                    <form action="{{ route('admin.galleries.destroy', [$gallery]) }}" method="POST" class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" title="Delete this" onclick="return confirm('Are you sure to delete ?')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

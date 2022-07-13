@@ -12,9 +12,11 @@ class AgalleryServiceProvider extends ServiceProvider
     {
         $this->commands([ InstallCommand::class ]);
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'agallery');
-        /* $this->loadViewComponentsAs('agallery', [
-            View\Components\Agallery::class,
-        ]); */
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/admin.php');
+        $this->loadViewComponentsAs('agallery', [
+            View\Components\GalleryCard::class,
+        ]);
 
         Paginator::useBootstrap();
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

@@ -22,7 +22,6 @@ class GalleryItemFactory extends Factory
     public function definition()
     {
         return [
-            'gallery_id'    =>  Gallery::inRandomOrder()->first()->id,
             'title'         =>  $this->faker->realText(rand(20, 50), 2),
             'description'   =>  $this->faker->realText(rand(150, 250), 2),
             'item_type'     =>  $this->getItemType(),
@@ -30,6 +29,7 @@ class GalleryItemFactory extends Factory
             'image_md'      =>  null,
             'image_sm'      =>  null,
             'youtube_url'   =>  null,
+            'status'        =>  rand(0,1),
             'user_id'       =>  User::inRandomOrder()->first()->id,
         ];
     }

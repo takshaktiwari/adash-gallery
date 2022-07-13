@@ -37,18 +37,20 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('admin.galleries-items.edit', [$item]) }}" class="btn btn-sm btn-success" title="Edit this">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                <div class="text-nowrap">
+                                    <a href="{{ route('admin.galleries-items.edit', [$item]) }}" class="btn btn-sm btn-success" title="Edit this">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
 
-                                <form action="{{ route('admin.galleries-items.destroy', [$item]) }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger" title="Delete this" onclick="return confirm('Are you sure to delete ?')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                                <div class="border-top mt-2 pt-1">
+                                    <form action="{{ route('admin.galleries-items.destroy', [$item]) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" title="Delete this" onclick="return confirm('Are you sure to delete ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="border-top mt-2 pt-1 text-center">
                                     <span class="badge font-12 bg-{{ $item->status ? 'success' : 'danger' }}">
                                         {{ $item->status ? 'Active' : 'Inactive' }}
                                     </span>
@@ -58,6 +60,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            {{ $galleryItems->links() }}
         </div>
     </div>
 </x-admin.layout>

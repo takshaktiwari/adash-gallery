@@ -21,7 +21,7 @@ class GalleryFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->realText(rand(15, 40), 2);
+        $name = $this->faker->realText(rand(15, 60), 2);
         return [
             'name'          =>  $name,
             'description'   =>  $this->faker->realText(rand(150, 250), 2),
