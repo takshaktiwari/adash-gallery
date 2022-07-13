@@ -22,4 +22,6 @@
                 'height'	=>	550,
             ]
         ],
+
+        'routes' => true, // Enable or disable routes for front pages
     ],
