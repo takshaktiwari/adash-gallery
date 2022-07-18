@@ -19,7 +19,7 @@ class GallerySeeder extends Seeder
      */
     public function run()
     {
-        Gallery::factory(10)
+        Gallery::factory(20)
             ->create()
             ->each(function ($gallery) {
                 $imageName = Str::of(microtime())->slug('-')->append('.jpg');
@@ -29,11 +29,13 @@ class GallerySeeder extends Seeder
                 $image_md = 'md/'.$imageName;
                 $image_sm = 'sm/'.$imageName;
 
-                Picsum::dimensions(800, 1000)
+                $w = rand(6, 12)*100;
+                $h = rand(6, 12)*100;
+                Picsum::dimensions($w, $h)
                     ->basePath(Storage::disk('public')->path($basePath))
                     ->save($image_lg)
-                    ->save($image_md, 400)
-                    ->save($image_sm, 200)
+                    ->save($image_md, $w/2)
+                    ->save($image_sm, $w/3)
                     ->destroy();
 
                 $gallery->image_lg = $basePath.'/'.$image_lg;
@@ -42,7 +44,7 @@ class GallerySeeder extends Seeder
                 $gallery->save();
             });
 
-        GalleryItem::factory(100)
+        GalleryItem::factory(250)
             ->create()
             ->each(function ($item) {
                 $imageName = Str::of(microtime())->slug('-')->append('.jpg');
@@ -52,11 +54,14 @@ class GallerySeeder extends Seeder
                 $image_md = 'md/'.$imageName;
                 $image_sm = 'sm/'.$imageName;
 
-                Picsum::dimensions(800, 1000)
+                $w = rand(6, 12)*100;
+                $h = rand(6, 12)*100;
+
+                Picsum::dimensions($w, $h)
                     ->basePath(Storage::disk('public')->path($basePath))
                     ->save($image_lg)
-                    ->save($image_md, 400)
-                    ->save($image_sm, 200)
+                    ->save($image_md, $w/2)
+                    ->save($image_sm, $w/3)
                     ->destroy();
 
                 $item->image_lg = $basePath.'/'.$image_lg;

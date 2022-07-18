@@ -10,6 +10,13 @@ use Takshak\Agallery\Models\GalleryItem;
 
 class GalleryController extends Controller
 {
+    public $masonry = false;
+
+    public function __construct(Request $request)
+    {
+        $this->masonry = ($request->get('layout') == 'masonry') ? true : false;
+    }
+
     public function index(Request $request)
     {
         $otherGalleries = Gallery::query()
@@ -24,6 +31,14 @@ class GalleryController extends Controller
             ->active()->latest()->paginate(12)->withQueryString();
 
         $featuredGalleries = $this->_getFeaturedGalleries();
+        $masonry = $this->masonry;
+
+        if ($this->masonry) {
+            return View::first(
+                ['galleries.index_masonry', 'agallery::galleries.index_masonry'],
+                compact('featuredGalleries', 'otherGalleries')
+            );
+        }
 
         return View::first(
             ['galleries.index_grid', 'agallery::galleries.index_grid'],
@@ -39,8 +54,17 @@ class GalleryController extends Controller
             ->withQueryString();
 
         $featuredGalleries = $this->_getFeaturedGalleries();
+        $masonry = $this->masonry;
+
+        if ($this->masonry) {
+            return View::first(
+                ['galleries.show_masonry', 'agallery::galleries.show_masonry'],
+                compact('gallery', 'galleryItems', 'featuredGalleries')
+            );
+        }
+
         return View::first(
-            ['galleries.show', 'agallery::galleries.show'],
+            ['galleries.show_grid', 'agallery::galleries.show_grid'],
             compact('gallery', 'galleryItems', 'featuredGalleries')
         );
     }

@@ -12,9 +12,11 @@ class GalleryCard extends Component
      *
      * @return void
      */
-    public function __construct(public $gallery)
+    public function __construct(public $gallery, public $lines = 1, public $masonry = false)
     {
-        //
+        if (request('layout') == 'masonry') {
+            $this->masonry = true;
+        }
     }
 
     /**
@@ -24,9 +26,15 @@ class GalleryCard extends Component
      */
     public function render()
     {
+        if ($this->masonry) {
+            return View::first([
+                'components.galleries.gallery-card_masonry',
+                'agallery::components.galleries.gallery-card_masonry'
+            ]);
+        }
         return View::first([
-            'components.galleries.gallery-card',
-            'agallery::components.galleries.gallery-card'
+            'components.galleries.gallery-card_grid',
+            'agallery::components.galleries.gallery-card_grid'
         ]);
     }
 }

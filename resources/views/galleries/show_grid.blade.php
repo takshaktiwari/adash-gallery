@@ -12,7 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     @endpush
 
-    <x-breadcrumb title="Gallery Items" :links="[['text' => 'Galleries', 'url' => route('galleries.index')], ['text' => $gallery->name]]" />
+    <x-breadcrumb title="Gallery Items" :links="[['text' => 'Galleries', 'url' => route('galleries.index', ['layout' => request('layout')])], ['text' => $gallery->name]]" />
 
     <section class="py-5">
         <div class="container py-2">
@@ -43,7 +43,7 @@
             <h2 class="mb-4">Featured Galleries</h2>
             <div class="row g-3">
                 @foreach ($featuredGalleries as $gallery)
-                    <div class="col-lg-4">
+                    <div class="col-xl-3 col-md-4 col-6">
                         <x-agallery-gallery-card :gallery="$gallery" />
                     </div>
                 @endforeach
