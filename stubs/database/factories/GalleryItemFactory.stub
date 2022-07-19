@@ -21,15 +21,17 @@ class GalleryItemFactory extends Factory
      */
     public function definition()
     {
+        $item_type = $this->getItemType();
+        $youtube_url = ($item_type == 'video') ? 'https://www.youtube.com/watch?v=t0Q2otsqC4I' : null;
         return [
             'title'         =>  $this->faker->realText(rand(20, 50), 2),
             'description'   =>  $this->faker->realText(rand(150, 250), 2),
-            'item_type'     =>  $this->getItemType(),
+            'item_type'     =>  $item_type,
             'image_lg'      =>  null,
             'image_md'      =>  null,
             'image_sm'      =>  null,
-            'youtube_url'   =>  null,
-            'status'        =>  rand(0,1),
+            'youtube_url'   =>  $youtube_url,
+            'status'        =>  rand(0, 1),
             'user_id'       =>  User::inRandomOrder()->first()->id,
         ];
     }
