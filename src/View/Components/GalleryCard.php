@@ -14,6 +14,9 @@ class GalleryCard extends Component
      */
     public function __construct(public $gallery, public $lines = 1, public $masonry = false)
     {
+        if (!$this->masonry) {
+            $this->masonry = (config('site.gallery.layout', 'masonry') == 'masonry') ? true : false;
+        }
         if (request('layout') == 'masonry') {
             $this->masonry = true;
         }

@@ -14,7 +14,10 @@ class GalleryController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->masonry = ($request->get('layout') == 'masonry') ? true : false;
+        $this->masonry = (config('site.gallery.layout', 'masonry') == 'masonry') ? true : false;
+        if ($request->get('layout') == 'masonry') {
+            $this->masonry = true;
+        }
     }
 
     public function index(Request $request)
@@ -28,15 +31,12 @@ class GalleryController extends Controller
                     ->orWhere('slug', 'LIKE', '%' . $request->get('search') . '%');
             })
             ->where('featured', false)
-            ->active()->latest()->paginate(12)->withQueryString();
-
-        $featuredGalleries = $this->_getFeaturedGalleries();
-        $masonry = $this->masonry;
+            ->active()->latest()->paginate(16)->withQueryString();
 
         if ($this->masonry) {
             return View::first(
                 ['galleries.index_masonry', 'agallery::galleries.index_masonry'],
-                compact('featuredGalleries', 'otherGalleries')
+                compact('otherGalleries')
             );
         }
 
@@ -53,13 +53,10 @@ class GalleryController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        $featuredGalleries = $this->_getFeaturedGalleries();
-        $masonry = $this->masonry;
-
         if ($this->masonry) {
             return View::first(
                 ['galleries.show_masonry', 'agallery::galleries.show_masonry'],
-                compact('gallery', 'galleryItems', 'featuredGalleries')
+                compact('gallery', 'galleryItems')
             );
         }
 
@@ -69,17 +66,28 @@ class GalleryController extends Controller
         );
     }
 
-    public function _getFeaturedGalleries($limit = 3)
+    public function groups(Request $request)
     {
-        return Gallery::query()
+        $galleries = Gallery::query()
             ->withCount('galleryItems')
-            ->select('id', 'name', 'slug', 'image_sm', 'image_md')
-            ->when(request()->get('search'), function ($query) {
-                $query->where('name', 'LIKE', '%' . request()->get('search') . '%')
-                    ->orWhere('description', 'LIKE', '%' . request()->get('search') . '%')
-                    ->orWhere('slug', 'LIKE', '%' . request()->get('search') . '%');
+            ->select('id', 'name', 'slug', 'description')
+            ->when($request->get('search'), function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->get('search') . '%')
+                    ->orWhere('description', 'LIKE', '%' . $request->get('search') . '%')
+                    ->orWhere('slug', 'LIKE', '%' . $request->get('search') . '%');
             })
-            ->active()->latest()
-            ->featured()->limit($limit)->get();
+            ->active()
+            ->latest()
+            ->paginate(8)
+            ->withQueryString();
+
+        $masonry = false;
+        if ((config('site.gallery.layout', 'masonry') == 'masonry') || request('layout') == 'masonry') {
+            $masonry = true;
+        }
+        return View::first(
+            ['galleries.groups', 'agallery::galleries.groups'],
+            compact('galleries', 'masonry')
+        );
     }
 }

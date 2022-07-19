@@ -16,6 +16,7 @@ class AgalleryServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/admin.php');
         $this->loadViewComponentsAs('agallery', [
             View\Components\GalleryCard::class,
+            View\Components\FeaturedGalleries::class,
         ]);
 
         Paginator::useBootstrap();

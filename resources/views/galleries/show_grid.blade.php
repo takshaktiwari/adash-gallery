@@ -2,8 +2,13 @@
     @push('styles')
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
         <style>
-            .featured_gallery {
-                background-color: #f3f3f3;
+            .gallery_banner{
+                background-image: url('{{ $gallery->image_lg() }}');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                min-height: 300px;
+                background-attachment: fixed;
             }
         </style>
     @endpush
@@ -16,8 +21,10 @@
 
     <section class="py-5">
         <div class="container py-2">
-            <h2 class="mb-0">{{ $gallery->name }}</h2>
+            <div class="gallery_banner rounded py-5 mb-3"></div>
+            <h2 class="mb-1">{{ $gallery->name }}</h2>
             <p class="fs-5">{{ $gallery->description }}</p>
+            <hr>
 
             <div class="row g-3 mt-4">
                 @foreach ($galleryItems as $item)
@@ -38,16 +45,5 @@
         </div>
     </section>
 
-    <section class="featured_gallery py-5">
-        <div class="container py-2">
-            <h2 class="mb-4">Featured Galleries</h2>
-            <div class="row g-3">
-                @foreach ($featuredGalleries as $gallery)
-                    <div class="col-xl-3 col-md-4 col-6">
-                        <x-agallery-gallery-card :gallery="$gallery" />
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+    <x-agallery-featured-galleries />
 </x-app-layout>
