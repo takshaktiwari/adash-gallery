@@ -30,7 +30,7 @@
             <div class="row g-3 mt-4" data-masonry='{"percentPosition": true }'>
                 @foreach ($galleryItems as $item)
                     <div class="col-lg-3 col-md-4 col-6">
-                        <a data-fancybox="gallery" data-src="{{ $item->image_lg() }}"
+                        <a data-fancybox="gallery" href="{{ ($item->item_type == 'video') ? $item->youtube_url : $item->image_lg() }}"
                             data-caption="<div class='text-center'>{{ $item->title }}<div class='small'>{{ $item->description }}</div></div>">
                             <img src="{{ $item->image_md() }}" alt="item image" class="rounded w-100">
                         </a>
