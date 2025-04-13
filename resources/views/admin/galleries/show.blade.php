@@ -49,17 +49,28 @@
                             <td>{{ $gallery->user->name }}</td>
                         </tr>
                     </table>
-                    <a href="{{ route('admin.galleries.edit', [$gallery]) }}" class="btn btn-success" title="Edit this">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
 
-                    <form action="{{ route('admin.galleries.destroy', [$gallery]) }}" method="POST" class="d-inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" title="Delete this" onclick="return confirm('Are you sure to delete ?')">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                    </form>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{{ route('admin.galleries.edit', [$gallery]) }}" class="btn btn-success" title="Edit this">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('admin.galleries.destroy', [$gallery]) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" title="Delete this" onclick="return confirm('Are you sure to delete ?')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+
+                        <div class="px-2"></div>
+
+                        <a href="{{ route('admin.galleries-items.create', ['gallery' => $gallery->id]) }}" class="btn btn-info" title="Edit this">
+                            <i class="fas fa-images"></i> Add Items
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -76,6 +87,7 @@
                         <tr>
                             <th>Image</th>
                             <th>Item Details</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -96,6 +108,11 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <span class="badge font-12 bg-{{ $item->status ? 'success' : 'danger' }}">
+                                        {{ $item->status ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
+                                <td class="text-nowrap">
                                     <a href="{{ route('admin.galleries-items.edit', [$item]) }}" class="btn btn-sm btn-success" title="Edit this">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -107,11 +124,6 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                    <div class="border-top mt-2 pt-1">
-                                        <span class="badge font-12 bg-{{ $item->status ? 'success' : 'danger' }}">
-                                            {{ $item->status ? 'Active' : 'Inactive' }}
-                                        </span>
-                                    </div>
                                 </td>
                             </tr>
                         @endforeach

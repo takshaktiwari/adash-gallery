@@ -2,7 +2,7 @@
 
     <x-breadcrumb title="Galleries" :links="[['text' => 'Galleries']]" />
 
-    <x-agallery-featured-galleries :masonry="true" />
+    <x-agallery-agallery:featured-galleries :masonry="true" />
 
     @if ($otherGalleries->count())
         <section class="py-5">
@@ -11,7 +11,7 @@
                 <div class="row g-3" data-masonry='{"percentPosition": true }'>
                     @foreach ($otherGalleries as $gallery)
                         <div class="col-xl-3 col-md-4 col-6">
-                            <x-agallery-gallery-card :gallery="$gallery" lines="3" />
+                            <x-agallery-agallery:gallery-card :gallery="$gallery" lines="3" />
                         </div>
                     @endforeach
                 </div>

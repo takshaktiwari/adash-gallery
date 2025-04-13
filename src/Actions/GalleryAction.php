@@ -29,13 +29,13 @@ class GalleryAction
 
             Imager::init($request->file('image'))
                 ->resizeFit(
-                    config('site.gallery.cover_image.large', 1000),
-                    config('site.gallery.cover_image.large', 600)
+                    config('agallery.cover_image.large', 1000),
+                    config('agallery.cover_image.large', 600)
                 )
                 ->basePath(Storage::disk('public')->path($basePath))
                 ->save($image_lg)
-                ->save($image_md, config('site.gallery.cover_image.medium', 500))
-                ->save($image_sm, config('site.gallery.cover_image.small', 300));
+                ->save($image_md, config('agallery.cover_image.medium', 500))
+                ->save($image_sm, config('agallery.cover_image.small', 300));
 
             $gallery->image_lg = $basePath.'/'.$image_lg;
             $gallery->image_md = $basePath.'/'.$image_md;

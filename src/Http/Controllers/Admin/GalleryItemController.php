@@ -1,15 +1,16 @@
 <?php
 
-namespace Takshak\Agallery\Traits\Controllers\Admin;
+namespace Takshak\Agallery\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\View;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Takshak\Agallery\Actions\GalleryItemAction;
 use Takshak\Agallery\Models\Gallery;
 use Takshak\Agallery\Models\GalleryItem;
 
-trait GalleryItemControllerTrait
+class GalleryItemController extends Controller
 {
     public function index(Request $request)
     {

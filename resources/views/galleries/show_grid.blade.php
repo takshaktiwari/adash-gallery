@@ -45,5 +45,5 @@
         </div>
     </section>
 
-    <x-agallery-featured-galleries />
+    <x-agallery-agallery:featured-galleries />
 </x-app-layout>

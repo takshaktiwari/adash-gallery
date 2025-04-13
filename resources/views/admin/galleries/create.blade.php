@@ -40,9 +40,14 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="">Cover Image </label>
-                        <input type="file" name="image" class="form-control">
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <div id="image-preview"></div>
+                        </div>
+                        <div class="form-group flex-fill">
+                            <label for="">Cover Image</label>
+                            <input type="file" name="image" accept="image/*" class="form-control" id="crop-image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,4 +79,18 @@
             </button>
         </div>
     </form>
+
+    @push('scripts')
+        <script>
+            var previewImg = {
+                height: '65px',
+                rounded: '5px',
+            };
+            imageCropper(
+                'crop-image',
+                eval("{{ config('agallery.cover_image.large', 1000).' / '.config('agallery.cover_image.large', 600) }}"),
+                previewImg
+            );
+        </script>
+    @endpush
 </x-admin.layout>

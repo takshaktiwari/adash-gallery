@@ -7,11 +7,20 @@ Require the package with composer
 
     composer require takshak/adash-gallery
 
-Run the command to setup the table, pages, models and all
+Run migration and publish the files
 
-    php artisan adash-gallery:install
+    php artisan vendor:publish --tag=agallery-seeders
+    php artisan migrate
+    php artisan db:seed --class=GallerySeeder
 
-You can disable install command after setup via config file (site.php). You can set the layout of the gallery and gallery's cover image size.
+Publish views and config for further customization
+
+    php artisan vendor:publish --tag=agallery-views
+    php artisan vendor:publish --tag=agallery-seeders
+
+Add links in admin sidebar menu using component `<x-agallery-agallery:admin-sidebar-links  />`
+
+You can set the layout of the gallery and gallery's cover image size.
 This packages comes with some frontend pages and components which you can integrate in your app. There are two layouts for gallery 'grid' and 'masonry'. You can set the layout in config file. Default layout is 'grid' you can activate 'masonry' layout by passing layout=masonry parameter in url, eg. `[https://domain.com]/galleries?layout=masonry`.
 
 Available routes for front pages are:
@@ -20,7 +29,7 @@ Available routes for front pages are:
     [https://domain.com]/galleries/groups
     [https://domain.com]/galleries/{gallery:slug}
 
-You can use component `<x-agallery-featured-galleries  />` to list featured galleries anywhere in you projects. This component contains following parameters:
+You can use component `<x-agallery-agallery:featured-galleries  />` to list featured galleries anywhere in you projects. This component contains following parameters:
 
 * lines (int): to define the number of lines for gallery name.
 * items (int): define how many featured images will be listed with this component.

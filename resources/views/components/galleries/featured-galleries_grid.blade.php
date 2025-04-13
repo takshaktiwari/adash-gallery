@@ -12,7 +12,7 @@
             <div class="row g-3">
                 @foreach ($galleries as $gallery)
                     <div class="col-xl-3 col-md-4 col-6">
-                        <x-agallery-gallery-card :gallery="$gallery" />
+                        <x-agallery-agallery:gallery-card :gallery="$gallery" />
                     </div>
                 @endforeach
             </div>

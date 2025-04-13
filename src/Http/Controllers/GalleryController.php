@@ -14,7 +14,7 @@ class GalleryController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->masonry = (config('site.gallery.layout', 'masonry') == 'masonry') ? true : false;
+        $this->masonry = (config('agallery.layout', 'masonry') == 'masonry') ? true : false;
         if ($request->get('layout') == 'masonry') {
             $this->masonry = true;
         }
@@ -82,7 +82,7 @@ class GalleryController extends Controller
             ->withQueryString();
 
         $masonry = false;
-        if ((config('site.gallery.layout', 'masonry') == 'masonry') || request('layout') == 'masonry') {
+        if ((config('agallery.layout', 'masonry') == 'masonry') || request('layout') == 'masonry') {
             $masonry = true;
         }
         return View::first(

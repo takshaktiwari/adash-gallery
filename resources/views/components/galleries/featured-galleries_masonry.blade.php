@@ -13,7 +13,7 @@
             <div class="row g-3" data-masonry='{"percentPosition": true }'>
                 @foreach ($galleries as $gallery)
                     <div class="col-xl-3 col-md-4 col-sm-6">
-                        <x-agallery-gallery-card :gallery="$gallery" :masonry="true" lines="3" />
+                        <x-agallery-agallery:gallery-card :gallery="$gallery" :masonry="true" lines="3" />
                     </div>
                 @endforeach
             </div>

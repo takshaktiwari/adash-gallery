@@ -16,6 +16,7 @@
                         <th>#</th>
                         <th>Image</th>
                         <th>Item Details</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,6 +38,11 @@
                                 @endif
                             </td>
                             <td>
+                                <span class="badge font-12 bg-{{ $item->status ? 'success' : 'danger' }}">
+                                    {{ $item->status ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+                            <td>
                                 <div class="text-nowrap">
                                     <a href="{{ route('admin.galleries-items.edit', [$item]) }}" class="btn btn-sm btn-success" title="Edit this">
                                         <i class="fas fa-edit"></i>
@@ -49,11 +55,6 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                </div>
-                                <div class="border-top mt-2 pt-1 text-center">
-                                    <span class="badge font-12 bg-{{ $item->status ? 'success' : 'danger' }}">
-                                        {{ $item->status ? 'Active' : 'Inactive' }}
-                                    </span>
                                 </div>
                             </td>
                         </tr>

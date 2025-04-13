@@ -1,6 +1,6 @@
 <?php
 
-namespace Takshak\Agallery\View\Components;
+namespace Takshak\Agallery\View\Components\Agallery;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\View;
@@ -17,7 +17,7 @@ class FeaturedGalleries extends Component
     public function __construct(public $lines = 1, public $items = 4, public $masonry = false)
     {
         if (!$this->masonry) {
-            $this->masonry = (config('site.gallery.layout', 'masonry') == 'masonry') ? true : false;
+            $this->masonry = (config('agallery.layout', 'masonry') == 'masonry') ? true : false;
         }
         if (request('layout') == 'masonry') {
             $this->masonry = true;

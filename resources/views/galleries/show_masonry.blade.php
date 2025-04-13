@@ -46,5 +46,5 @@
         </div>
     </section>
 
-    <x-agallery-featured-galleries :masonry="true" />
+    <x-agallery-agallery:featured-galleries :masonry="true" />
 </x-app-layout>
