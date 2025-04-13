@@ -14,7 +14,7 @@ class GalleryController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->masonry = (config('agallery.layout', 'masonry') == 'masonry') ? true : false;
+        $this->masonry = (config('agallery.layout', request('layout', 'masonry')) == 'masonry') ? true : false;
         if ($request->get('layout') == 'masonry') {
             $this->masonry = true;
         }
