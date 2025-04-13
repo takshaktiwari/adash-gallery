@@ -42,28 +42,28 @@ class GalleryController extends Controller
 
         return View::first(
             ['galleries.index_grid', 'agallery::galleries.index_grid'],
-            compact('featuredGalleries', 'otherGalleries')
+            compact('otherGalleries')
         );
     }
 
     public function show(Gallery $gallery, Request $request)
     {
         $galleryItems = GalleryItem::query()
-            ->whereHas('galleries', fn ($q) => $q->where('galleries.id', $gallery->id))
+            ->whereHas('galleries', fn($q) => $q->where('galleries.id', $gallery->id))
             ->paginate(20)
             ->withQueryString();
 
         if ($this->masonry) {
-            return View::first(
-                ['galleries.show_masonry', 'agallery::galleries.show_masonry'],
-                compact('gallery', 'galleryItems')
-            );
+            return View::first(['galleries.show_masonry', 'agallery::galleries.show_masonry'])->with([
+                'gallery' => $gallery,
+                'galleryItems' => $galleryItems
+            ]);
         }
 
-        return View::first(
-            ['galleries.show_grid', 'agallery::galleries.show_grid'],
-            compact('gallery', 'galleryItems', 'featuredGalleries')
-        );
+        return View::first(['galleries.show_grid', 'agallery::galleries.show_grid'])->with([
+            'gallery' => $gallery,
+            'galleryItems' => $galleryItems
+        ]);
     }
 
     public function groups(Request $request)
@@ -81,13 +81,10 @@ class GalleryController extends Controller
             ->paginate(8)
             ->withQueryString();
 
-        $masonry = false;
-        if ((config('agallery.layout', 'masonry') == 'masonry') || request('layout') == 'masonry') {
-            $masonry = true;
-        }
-        return View::first(
-            ['galleries.groups', 'agallery::galleries.groups'],
-            compact('galleries', 'masonry')
-        );
+
+        return View::first(['galleries.groups', 'agallery::galleries.groups'])->with([
+            'galleries' => $galleries,
+            'masonry' => $this->masonry
+        ]);
     }
 }
