@@ -17,6 +17,7 @@ Publish views and config for further customization
 
     php artisan vendor:publish --tag=agallery-views
     php artisan vendor:publish --tag=agallery-seeders
+    php artisan vendor:publish --tag=agallery-routes
 
 Add links in admin sidebar menu using component `<x-agallery-agallery:admin-sidebar-links  />`
 
